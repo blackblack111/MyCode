@@ -2,16 +2,16 @@
 
 import requests
 import urllib.parse
-from googletrans import Translator
+from .GoogleTrans import GooTrans
 from os import path
 import os
 import time
 
-translator = Translator()
-filelist = ['a1','a2','b1','b2','c1']
-languages = ['af','sq','am','ar','hy','az','eu','be','bn','bs','bg','ca','ceb','ny','zh-cn','zh-tw','co','hr','cs','da','nl','eo','et','tl','fi','fr','fy','gl','ka','de','el','gu','ht','ha','haw','iw','hi','hmn','hu','is','ig','id','ga','it','ja','jw','kn','kk','km','ko','ku','ky','lo','la','lv','lt','lb','mk','mg','ms','ml','mt','mi','mr','mn','my','ne','no','ps','fa','pl','pt','pa','ro','ru','sm','gd','sr','st','sn','sd','si','sk','sl','so','es','su','sw','sv','tg','ta','te','th','tr','uk','ur','uz','vi','cy','xh','yi','yo','zu','fil','he']
-# languages = ['zh-cn']
-# filelist = ['test','test2']
+
+# filelist = ['a1','a2','b1','b2','c1']
+# languages = ['af','sq','am','ar','hy','az','eu','be','bn','bs','bg','ca','ceb','ny','zh-cn','zh-tw','co','hr','cs','da','nl','eo','et','tl','fi','fr','fy','gl','ka','de','el','gu','ht','ha','haw','iw','hi','hmn','hu','is','ig','id','ga','it','ja','jw','kn','kk','km','ko','ku','ky','lo','la','lv','lt','lb','mk','mg','ms','ml','mt','mi','mr','mn','my','ne','no','ps','fa','pl','pt','pa','ro','ru','sm','gd','sr','st','sn','sd','si','sk','sl','so','es','su','sw','sv','tg','ta','te','th','tr','uk','ur','uz','vi','cy','xh','yi','yo','zu','fil','he']
+languages = ['zh-cn']
+filelist = ['a1']
 rawfilepath = os.getcwd()
 
 for f in filelist:
@@ -40,8 +40,9 @@ for f in filelist:
 
         for lang in languages:
             time.sleep(3)
-            transword = translator.translate(sentence, dest=lang).text
+            transword = GooTrans(sentence,lang)
             tcomposed = urllib.parse.quote(transword)
+            print(tcomposed)
 
             url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=' + tcomposed + '&tl='+lang+'&total=1&idx=0&textlen=6'
 
